@@ -55,15 +55,43 @@ const expenseReport = [
   1783, 1774, 1688, 1925, 1471, 1203, 2007, 1769, 1323, 1370, 1689, 
   1268, 1868
 ]
+const CHOSEN_NUMBER = 2020
 
 let answer = []
 
 for (let expense1 in expenseReport) {
   for (let expense2 = expense1++; expense2 < expenseReport.length; expense2++) {
-    if (expenseReport[expense1] + expenseReport[expense2] == 2020) {
+    if (expenseReport[expense1] + expenseReport[expense2] === CHOSEN_NUMBER) {
       answer.push(expenseReport[expense1] * expenseReport[expense2])
     }
   }
 }
 
 console.log(`The answer is ${answer.toString()}`)
+
+/** 
+--- Part Two ---
+The Elves in accounting are thankful for your help; one of them even offers you a starfish coin they had left over from a past vacation. They offer you a second one if you can find three numbers in your expense report that meet the same criteria.
+
+Using the above example again, the three entries that sum to 2020 are 979, 366, and 675. Multiplying them together produces the answer, 241861950.
+
+In your expense report, what is the product of the three entries that sum to 2020?
+*/
+
+let answerPartTwo = []
+
+for (let expense1 in expenseReport) {
+  for (let expense2 = expense1++; expense2 < expenseReport.length; expense2++) {
+    for (let expense3 = expense2++; expense3 < expenseReport.length; expense3++) {
+      let isSumEqualChosenNumber = expenseReport[expense1] 
+        + expenseReport[expense2] 
+        + expenseReport[expense3] 
+        === CHOSEN_NUMBER;
+      if (isSumEqualChosenNumber) {
+        answerPartTwo.push(expenseReport[expense1] * expenseReport[expense2] * expenseReport[expense3] )
+      }
+    }
+  }
+}
+
+console.log(`The answer to part two is ${answerPartTwo.toString()}`)
