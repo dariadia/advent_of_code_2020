@@ -47,9 +47,7 @@ const isShinyGoldContained = (color) => {
 
   const bagsContained = bagsContainer.get(color)
   for (const { color: bag } of bagsContained) {
-    if (isShinyGoldContained(bag)) {
-      return true
-    }
+    if (isShinyGoldContained(bag)) return true
   }
   return false
 }
@@ -70,12 +68,10 @@ for (const luggageRule of luggageRules) {
     const { groups } = /((?<number>\d+) )?(?<color>.*)/.exec(
       bagDescription.replace(/ bags?/, "")
     )
-    if (!bagsContainer.has(bag)) {
-      bagsContainer.set(bag, [])
-    }
-    if (!groups.number) {
-      groups.number = 0
-    }
+
+    if (!bagsContainer.has(bag)) bagsContainer.set(bag, [])
+    if (!groups.number) groups.number = 0
+
     bagsContainer.set(bag, [...bagsContainer.get(bag), groups])
   })
 }
@@ -84,9 +80,7 @@ const colorsAvailable = bagsContainer.keys()
 let bagsTotal = 0
 
 for (const color of colorsAvailable) {
-  if (isShinyGoldContained(color) && color != SHINY_GOLD) {
-    bagsTotal++
-  }
+  if (isShinyGoldContained(color) && color != SHINY_GOLD) bagsTotal++
 }
 
 console.log(
